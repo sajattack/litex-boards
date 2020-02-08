@@ -23,6 +23,7 @@ class _CRG(Module):
     def __init__(self, platform, with_sdram=False):
         self.clock_domains.cd_sys    = ClockDomain()
         self.clock_domains.cd_sys_ps = ClockDomain()
+        self.clock_domains.cd_pix    = ClockDomain()
 
         # # #
 
@@ -44,6 +45,9 @@ class _CRG(Module):
                 p_CLK1_DUTY_CYCLE        = 50,
                 p_CLK1_MULTIPLY_BY       = 1,
                 p_CLK1_PHASE_SHIFT       = "-10000",
+                p_CLK2_DIVIDE_BY         = 2, # 720p 75MHz pixclk
+                p_CLK2_MULTIPLY_BY       = 3,
+                p_CLK2_PHASE_SHIFT       = "0",
                 p_COMPENSATE_CLOCK       = "CLK0",
                 p_INCLK0_INPUT_FREQUENCY = 20000,
                 p_OPERATION_MODE         = "NORMAL",
@@ -60,6 +64,9 @@ class _CRG(Module):
         self.comb += [
             self.cd_sys.clk.eq(pll_clk_out[0]),
             self.cd_sys_ps.clk.eq(pll_clk_out[1]),
+            self.cd_pix.clk.eq(pll_clk_out[2]),
+
+            #platform.request("user_led")[0].eq(self.cd_pix.clk)
         ]
         self.specials += [
             AsyncResetSynchronizer(self.cd_sys,    ~pll_locked),

@@ -47,7 +47,7 @@ _io = [
         IOStandard("3.3-V LVTTL")
     ),
 
-    ("hdmi", 0,
+    ("hdmi_out", 0,
         Subsignal("tx_d_r", Pins("AS12 AE12 W8 Y8 AD11 AD10 AE11 Y5")),
         Subsignal("tx_d_g", Pins("AF10 Y4 AE9 AB4 AE7 AF6 AF8 AF5")),
         Subsignal("tx_d_b", Pins("AE4 AH2 AH4 AH5 AH6 AG6 AF9 AE8")),
@@ -103,6 +103,17 @@ _mister_sdram_module_io = [
     ),
 ]
 
+_mister_ioboard_io = [
+    ("vga_out", 0,
+        Subsignal("hsync", Pins("AH22"), IOStandard("3.3-V LVTTL")),
+        Subsignal("vsync", Pins("AG24"), IOStandard("3.3-V LVTTL")),
+        Subsignal("r", Pins("AE17 AE20 AF20 AH18 AH19 AF21"), IOStandard("3.3-V LVTTL")),
+        Subsignal("g", Pins("AE19 AG15 AF18 AG18 AG19 AG20"), IOStandard("3.3-V LVTTL")),
+        Subsignal("b", Pins("AG21 AA20 AE22 AF22 AH23 AH21"), IOStandard("3.3-V LVTTL")),
+        Subsignal("en", Pins("AH27"), IOStandard("3.3-V LVTTL")), # Input
+    ),
+]
+
 # Platform -----------------------------------------------------------------------------------------
 
 class Platform(AlteraPlatform):
@@ -112,6 +123,7 @@ class Platform(AlteraPlatform):
     def __init__(self):
         AlteraPlatform.__init__(self, "5CSEBA6U23I7", _io)
         self.add_extension(_mister_sdram_module_io)
+        self.add_extension(_mister_ioboard_io)
 
     def create_programmer(self):
         return USBBlaster()
