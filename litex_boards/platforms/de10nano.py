@@ -18,6 +18,8 @@ _io = [
     ("user_led", 3, Pins("V15"), IOStandard("3.3-V LVTTL")),
     ("user_led", 4, Pins("AF26"), IOStandard("3.3-V LVTTL")),
     ("user_led", 5, Pins("AE26"), IOStandard("3.3-V LVTTL")),
+    ("user_led", 6, Pins("Y16"), IOStandard("3.3-V LVTTL")),
+    ("user_led", 7, Pins("AA23"), IOStandard("3.3-V LVTTL")),
 
     ("key", 0, Pins("AH17"), IOStandard("3.3-V LVTTL")),
     ("key", 1, Pins("AH16"), IOStandard("3.3-V LVTTL")),
@@ -105,8 +107,8 @@ _mister_sdram_module_io = [
 
 _mister_ioboard_io = [
     ("vga_out", 0,
-        Subsignal("hsync", Pins("AH22"), IOStandard("3.3-V LVTTL")),
-        Subsignal("vsync", Pins("AG24"), IOStandard("3.3-V LVTTL")),
+        Subsignal("hsync_n", Pins("AH22"), IOStandard("3.3-V LVTTL")),
+        Subsignal("vsync_n", Pins("AG24"), IOStandard("3.3-V LVTTL")),
         Subsignal("r", Pins("AE17 AE20 AF20 AH18 AH19 AF21"), IOStandard("3.3-V LVTTL")),
         Subsignal("g", Pins("AE19 AG15 AF18 AG18 AG19 AG20"), IOStandard("3.3-V LVTTL")),
         Subsignal("b", Pins("AG21 AA20 AE22 AF22 AH23 AH21"), IOStandard("3.3-V LVTTL")),
