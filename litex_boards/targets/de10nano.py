@@ -24,6 +24,7 @@ class _CRG(Module):
         self.clock_domains.cd_sys    = ClockDomain()
         self.clock_domains.cd_sys_ps = ClockDomain()
         self.clock_domains.cd_pix    = ClockDomain()
+        self.clock_domains.cd_vga    = ClockDomain()
 
         # # #
 
@@ -45,8 +46,8 @@ class _CRG(Module):
                 p_CLK1_DUTY_CYCLE        = 50,
                 p_CLK1_MULTIPLY_BY       = 1,
                 p_CLK1_PHASE_SHIFT       = "-10000",
-                p_CLK2_DIVIDE_BY         = 10, # 240p/60hz pixclk
-                p_CLK2_MULTIPLY_BY       = 3,
+                p_CLK2_DIVIDE_BY         = 2, # 240p/60hz pixclk
+                p_CLK2_MULTIPLY_BY       = 1,
                 p_CLK2_PHASE_SHIFT       = "0",
                 p_COMPENSATE_CLOCK       = "CLK0",
                 p_INCLK0_INPUT_FREQUENCY = 20000,
@@ -65,6 +66,7 @@ class _CRG(Module):
             self.cd_sys.clk.eq(pll_clk_out[0]),
             self.cd_sys_ps.clk.eq(pll_clk_out[1]),
             self.cd_pix.clk.eq(pll_clk_out[2]),
+            self.cd_vga.clk.eq(pll_clk_out[2])
         ]
         self.specials += [
             AsyncResetSynchronizer(self.cd_sys,    ~pll_locked),

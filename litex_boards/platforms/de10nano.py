@@ -114,6 +114,11 @@ _mister_ioboard_io = [
         Subsignal("b", Pins("AG21 AA20 AE22 AF22 AH23 AH21"), IOStandard("3.3-V LVTTL")),
         Subsignal("en", Pins("AH27"), IOStandard("3.3-V LVTTL")), # Input
     ),
+    ("buttons", 0,
+        Subsignal("reset", Pins("AG25"), IOStandard("3.3-V LVTTL")),
+        Subsignal("osd", Pins("AG23"), IOStandard("3.3-V LVTTL")),
+        Subsignal("user", Pins("AH24"), IOStandard("3.3-V LVTTL")),
+    ),
 ]
 
 # Platform -----------------------------------------------------------------------------------------
